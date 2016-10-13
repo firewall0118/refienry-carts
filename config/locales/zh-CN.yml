@@ -1,0 +1,30 @@
+zh-CN:
+  refinery:
+    plugins:
+      carts:
+        title: Carts
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: 建立新的 Cart
+            reorder: 对 Carts 重新排序
+            reorder_done: 对 Carts 的重新排序结束
+          records:
+            title: Carts
+            sorry_no_results: 对不起，未找到结果。 #Sorry! There are no results found.
+
+            # There are no Carts yet. Click "Add New Cart" to add your first cart.
+            no_items_yet: 目前没有 Carts . 点击 "Add New Cart" 创建一个cart.
+          cart:
+            view_live_html: 查看 cart 的最新内容.<br/><em>(新窗口中打开)</em>
+            edit: 编辑 cart
+            delete: 永久删除 cart
+      carts:
+        show:
+          other: 其他 Carts
+  activerecord:
+    attributes:
+      'refinery/carts/cart':
+        user: User
+        discount_code: Discount Code

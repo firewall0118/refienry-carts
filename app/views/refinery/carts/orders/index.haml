@@ -1,0 +1,7 @@
+%h2 
+  Previous Orders
+%ul#carts
+  -@orders.each do |order|
+    %li
+      = link_to refinery.order_path(order) do
+        \# #{order.confirmation_number}, #{order.updated_at.strftime('%B %e, %Y')}

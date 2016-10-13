@@ -1,0 +1,14 @@
+%b="#{type.titleize} Address"
+-if current_refinery_user.send "#{type}_address"
+  .address
+    =current_refinery_user.send "#{type}_address_line_1"
+    %br/
+    -unless current_refinery_user.send("#{type}_address_line_2").blank?
+      =current_refinery_user.send "#{type}_address_line_2"
+      %br/
+    =succeed ', ' do
+      =current_refinery_user.send "#{type}_address_city"
+    =current_refinery_user.send "#{type}_address_state"
+    =current_refinery_user.send "#{type}_address_zip"
+%br/
+%br/

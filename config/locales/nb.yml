@@ -1,0 +1,28 @@
+nb:
+  refinery:
+    plugins:
+      carts:
+        title: Carts
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Lag en ny Cart
+            reorder: Endre rekkefølgen på Carts
+            reorder_done: Ferdig å endre rekkefølgen Carts
+          records:
+            title: Carts
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Carts enda. Klikk på "Lag en ny Cart" for å legge til din første cart.
+          cart:
+            view_live_html: Vis hvordan denne cart ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne cart
+            delete: Fjern denne cart permanent
+      carts:
+        show:
+          other: Andre Carts
+  activerecord:
+    attributes:
+      'refinery/carts/cart':
+        user: User
+        discount_code: Discount Code

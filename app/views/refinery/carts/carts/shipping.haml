@@ -1,0 +1,25 @@
+%h1 Shipping
+
+-content_for :stylesheets, stylesheet_link_tag('refinery/carts')
+=render partial: 'progress', locals: {step: 2}
+%p/
+
+%p Select your shipping address.
+
+.btn.btn-primary
+  = link_to refinery.new_cart_address_path do
+    %span.glyphicon.glyphicon-plus
+    Add an address
+%p/
+
+=render @addresses
+%p.clearfix/
+
+
+=form_for @cart, url: refinery.cart_path do |f|
+  =render partial: @cart, locals: { address: true, f: f }
+
+  %br/  
+  %p
+    = link_to "Continue Shopping", continue_shopping_path, class: 'btn btn-primary'
+    = f.submit "Continue Checkout", class: 'btn btn-primary continue', disabled: @addresses.empty?

@@ -1,0 +1,29 @@
+es:
+  refinery:
+    plugins:
+      carts:
+        title: Carts
+#        article: masculino/femenino
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Crear nuevo cart
+            reorder: Reordenar carts
+            reorder_done: Reordenación de carts completada
+          records:
+            title: Carts
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay carts todavía. Pulsa en "Crear nuevo Cart" para crear tu primer cart.
+          cart:
+            view_live_html: Ver este cart como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este cart
+            delete: Borrar este cart para siempre
+      carts:
+        show:
+          other: Otros carts
+  activerecord:
+    attributes:
+      'refinery/carts/cart':
+        user: User
+        discount_code: Discount Code

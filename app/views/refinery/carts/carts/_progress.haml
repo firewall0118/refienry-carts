@@ -1,0 +1,23 @@
+.cart-progress
+  .cart-bar
+  = link_to refinery.cart_path do
+    .cart-step{style: 'left: 25%;', class: step==1?'cart-step-active':''} 
+      1 
+      %br
+      Cart
+  = link_to refinery.shipping_cart_path do
+    .cart-step{style: 'left: 50%;', class: step==2?'cart-step-active':''} 
+      2 
+      %br
+      Shipping
+  - if @cart.ready_to_ship?
+    = link_to refinery.cart_payment_url(protocol: 'https') do
+      .cart-step{style: 'left: 75%;', class: step==3?'cart-step-active':''} 
+        3
+        %br
+        Payment
+  - else
+    .cart-step{style: 'left: 75%;', class: step==3?'cart-step-active':''} 
+      3 
+      %br
+      Payment

@@ -1,0 +1,45 @@
+-content_for :stylesheets, stylesheet_link_tag('refinery/carts')
+
+-if @cart.paid # static
+  %h1 Order # #{@cart.id}
+  = link_to "Continue Shopping", continue_shopping_path, class: 'btn btn-primary'
+  %p/
+  =render partial: @cart, locals: { static: true }
+  %p/
+
+-else
+  %h1 Shopping Cart
+
+  -unless @cart.line_items.empty?
+    =render partial: 'progress', locals: { step: 1 }
+    %p/
+
+  .row
+    %section.col-xs-9
+      -if @cart.line_items.empty?
+        Your cart is empty.
+        %p/
+        = link_to "Continue Shopping", continue_shopping_path, class: 'btn btn-primary'
+      -else
+        = link_to "Continue Shopping", continue_shopping_path, class: 'btn btn-primary'
+        = link_to "Continue Checkout", refinery.shipping_cart_path, class: 'btn btn-primary continue' unless @cart.paid
+        %p/
+        =render partial: @cart, locals: { address: @cart.paid, static: @cart.paid, format: true }
+        %br/
+        = link_to "Continue Shopping", continue_shopping_path, class: 'btn btn-primary'
+        = link_to "Continue Checkout", refinery.shipping_cart_path, class: 'btn btn-primary continue'  unless @cart.paid 
+        %p/
+    %aside.col-xs-3
+      -unless @cart.paid || @cart.line_items.empty?
+        -if current_refinery_user
+          =render partial: 'address', locals: { type: 'billing' } 
+          =render partial: 'address', locals: { type: 'default_shipping' }
+
+        %b Credit Card
+        %br/
+        =filtered_credit_card
+        %br/
+             
+        =link_to "Express Checkout", refinery.express_cart_path, method: :put, class: 'btn btn-primary', 
+          disabled: no_express_checkout_for?(current_refinery_user)
+        

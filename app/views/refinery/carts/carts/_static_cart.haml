@@ -1,0 +1,42 @@
+%table{border: 1, cellpadding: 5}
+  %tr
+    %th Qty
+    %th{width: '25%'} Description
+    %th List Price
+    %th Special Price
+    %th Total Price
+    %th Address
+    %th Shipping Method
+    %th Expected Delivery
+    %th Shipped
+    %th Gift/Message
+  -cart.line_items.each_with_index do |li, i|
+    %tr
+      %td= li.qty
+      %td= li.description
+      %td{align: 'right'}= number_to_currency li.unit_price
+      %td{align: 'right'}= number_to_currency li.effective_price
+      %td{align: 'right'}= number_to_currency li.qty * li.effective_price
+      %td= li.address.line_1 if li.address && ! li.virtual
+      -# Shipping Method
+      %td
+      -# Expected Delivery
+      %td
+      -# Shipped
+      %td{align: 'center'}= "✓" if li.shipped
+      -# Gift
+      %td
+        -if li.gift
+          Yes /
+          =li.gift_message
+  %tr
+    -#Discount Code
+    %td{colspan: 4} 
+      Discount Code: 
+      = cart.discount_code
+    %td{align: 'right'}
+      = number_to_currency cart.discount
+  =cart_row cart, false, 'subtotal'
+  =cart_row cart, false, 'shipping'
+  =cart_row cart, false, 'tax'
+  =cart_row cart, false, 'total'

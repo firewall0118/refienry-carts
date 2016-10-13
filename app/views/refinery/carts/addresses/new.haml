@@ -1,0 +1,15 @@
+%h1 New Shipping Address
+
+=form_for [refinery, @cart, @address] do |f|
+  =f.text_field :line_1, placeholder: "Street"
+  %br/
+  =f.text_field :line_2, placeholder: "Apartment"
+  %br/
+  =f.text_field :city, placeholder: "City"
+  =f.text_field :country, placeholder: "Country"
+  =f.text_field :state, size: 2, placeholder: "ST"
+  =f.text_field :zip, size: 5, placeholder: "ZIP"
+  %br/
+  =hidden_field_tag :payment, params[:payment] 
+  =f.submit class: 'btn btn-primary'
+  

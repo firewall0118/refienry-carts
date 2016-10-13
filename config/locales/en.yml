@@ -1,0 +1,28 @@
+en:
+  refinery:
+    plugins:
+      carts:
+        title: Carts
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Add New Cart
+            reorder: Reorder Carts
+            reorder_done: Done Reordering Carts
+          records:
+            title: Carts
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Carts yet. Click "Add New Cart" to add your first cart.
+          cart:
+            view_live_html: View this cart live <br/><em>(opens in a new window)</em>
+            edit: Edit this cart
+            delete: Remove this cart forever
+      carts:
+        show:
+          other: Other Carts
+  activerecord:
+    attributes:
+      'refinery/carts/cart':
+        user: User
+        discount_code: Discount Code

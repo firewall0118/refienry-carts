@@ -1,0 +1,42 @@
+%h1 Payment
+
+-content_for :stylesheets, stylesheet_link_tag('refinery/carts')
+=render partial: 'progress', locals: {step: 3}
+%p/
+
+%p Select your billing address.
+%p
+  .btn.btn-primary
+    = link_to refinery.new_cart_address_path(payment: 1) do
+      %span.glyphicon.glyphicon-plus
+      Add an address
+
+=render partial: 'refinery/carts/addresses/address', collection: @addresses, locals: {billing: true}
+%p.clearfix/
+
+
+.col-xs-6{style: 'border-right: 1px solid gray; margin-right: 5px;'}
+  %p Please enter your payment information.
+  
+  =form_for @order, url: refinery.orders_path do |f|
+    =f.text_field :credit_card_name, placeholder: "Name On Card"
+    %br/
+    =f.text_field :credit_card, placeholder: "Credit Card Number"
+    #card_type{style: 'display: inline;'}
+    %br/
+    =f.text_field :month, size: 2, placeholder: "MM"
+    =f.text_field :year, size: 4, placeholder: "YYYY"
+    =f.text_field :ccv, size: 4, placeholder: "CCV"
+    %p/ 
+    %p/
+    =f.submit "Place Order", class: 'btn btn-warning', disabled: @address.nil?
+.cols-xs-6
+  %p Billing Address
+  -if @address
+    =render partial: 'refinery/carts/addresses/address', object: @address, locals: {billing: true}
+  -else
+    %i No billing address selected.
+
+%p.clearfix/
+=render partial: @cart, locals: { address: true, static: true }
+%p/

@@ -1,0 +1,28 @@
+tr:
+  refinery:
+    plugins:
+      carts:
+        title: Carts
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Yeni Ekle Cart
+            reorder: Tekrar sirala Carts
+            reorder_done: Tekrar siralama tamamlandiCarts
+          records:
+            title: Carts
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Carts yok henuz.  Tikla "Yeni Ekle Cart" eklemek senin ilk cart.
+          cart:
+            view_live_html: Bunu canlu cart goruntule <br/><em>(yeni bir pencerede acar)</em>
+            edit: Bunu Duzenle cart
+            delete: Bunu Sil cart sonsuza dek
+      carts:
+        show:
+          other: Diger Carts
+  activerecord:
+    attributes:
+      'refinery/carts/cart':
+        user: User
+        discount_code: Discount Code

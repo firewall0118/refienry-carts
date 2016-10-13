@@ -1,0 +1,28 @@
+cs:
+  refinery:
+    plugins:
+      carts:
+        title: Carts
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Přidat Cart
+            reorder: Řadit Carts
+            reorder_done: Konec řazení Carts
+          records:
+            title: Carts
+            sorry_no_results: Litujeme, ale nebyly nalezny žádné výsledky.
+            no_items_yet: Zatím nebyly vytvořeny žádné Carts. Zvolte "Přidat Cart" pro přidání prvního cart.
+          cart:
+            view_live_html: Zobrazit náhled cart<br/><em>(otevře se v novém okně)</em>
+            edit: Upravit cart
+            delete: Smazat cart
+      carts:
+        show:
+          other: Další Carts
+  activerecord:
+    attributes:
+      'refinery/carts/cart':
+        user: User
+        discount_code: Discount Code

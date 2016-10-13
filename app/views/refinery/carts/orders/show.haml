@@ -1,0 +1,11 @@
+-content_for :stylesheets, stylesheet_link_tag('refinery/carts')
+
+%h1 Order Confirmation
+
+%p Thank you for your order. Order # #{@order.id}.
+%p= link_to "Continue browsing.", '/'
+
+=render partial: @order.cart, locals: {address: true, static: true}
+
+%br/
+%br/

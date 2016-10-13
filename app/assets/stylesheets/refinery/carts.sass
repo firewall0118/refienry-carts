@@ -1,0 +1,72 @@
+@import "compass"
+
+.circle
+  border-radius: 50%
+  width: 75px
+  height: 75px
+
+.cart-step
+  @extend .circle
+  position: absolute
+  margin-left: -37.5px // use the center to position it
+  margin-top: -37.5px
+  top: 50%
+  color: white
+  font-size: 17px
+  padding: 8px 0px // This centers the text
+  text-align: center
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .3)
+  // needs latest Compass, add '@import "compass"' to your scss
+  background-color: #c9de96 // Old browsers
+  @include filter-gradient(#c9de96, #6e9934, horizontal) // IE6-8 fallback on horizontal gradient
+  // IE9 SVG, needs conditional override of 'filter' to 'none'
+  $experimental-support-for-svg: true
+  @include background-image(radial-gradient(18.75px 18.75px, ellipse cover,  #c9de96 0%,#8ab66b 44%,#6e9934 100%))
+  
+  a
+    color: white
+  
+.cart-step-active
+  @extend .cart-step
+  color: yellow
+  background-color: #7abcff
+  @include filter-gradient(#7abcff, #4096ee, horizontal)
+  @include background-image(radial-gradient(18.75px 18.75px, ellipse cover,  #7abcff 0%,#60abf8 44%,#4096ee 100%))
+
+  a
+    color: yellow
+    
+.cart-bar
+  width: 100%
+  height: 10px
+  margin: 32.5px auto
+  position: absolute
+  // needs latest Compass, add '@import "compass"' to your scss
+  background-color: #cdeb8e // Old browsers
+  @include filter-gradient(#cdeb8e, #a5c956, horizontal) // IE6-8
+  // IE9 SVG, needs conditional override of 'filter' to 'none'
+  $experimental-support-for-svg: true
+  @include background-image(linear-gradient(left,  #cdeb8e 0%,#a5c956 100%))
+
+  
+.cart-progress
+  position: relative
+  width: 90%
+  height: 75px
+  margin: 0 auto
+  
+.continue
+  float: right
+  
+#gift-dialog
+  display: none
+  position: absolute
+  background: white
+  top: 200px
+  left: 300px
+  width: 300px
+  height: 200px
+  // z-index: 1
+  border: 1px solid gray
+  padding: 10px  
+

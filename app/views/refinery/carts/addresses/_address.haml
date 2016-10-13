@@ -1,0 +1,25 @@
+- billing = defined?(billing) && billing # check if set, if not, set to false
+
+.col-xs-3.bg-grey{style: 'margin: 10px;'}
+  #address{style: 'min-height: 4em;'}
+    =address.line_1
+    %br/
+    -unless address.line_2.blank?
+      =address.line_2
+      %br/
+    =succeed ', ' do
+      =address.city
+    =address.state
+    =address.zip
+  #address-buttons{style: 'min-height: 4em;'}
+    -if billing
+      =update_address_form 'Billing Address', address, :billing unless address.billing
+    -else
+      =update_address_form 'Set Default', address, :default unless address.default
+      =form_for @cart, url: refinery.cart_path do |f|
+        =f.hidden_field :ship_all, value: address.id
+        =f.submit 'Ship All Here', class: 'btn btn-xs btn-primary', style: 'margin: 1px;'
+      =link_to refinery.cart_address_path(address), method: :delete, class: 'btn btn-xs btn-danger', style: 'margin: 1px;' do
+        %span.glyphicon.glyphicon-remove
+        Delete
+    

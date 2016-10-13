@@ -1,0 +1,83 @@
+-content_for :javascripts, javascript_include_tag('refinery/carts')
+
+- static = defined?(static) && static # check if set, if not, set to false
+- format = defined?(format) && format
+- address = defined?(address) && address
+
+-if static
+  = render partial: 'refinery/carts/carts/static_cart', locals: { cart: cart }
+-else # not static, dynamic
+  %table{border: 1, cellpadding: 5}
+    %tr
+      %th Qty
+      %th{width: '25%'} Description
+      - if format
+        %th Format
+      %th List Price
+      %th Special Price
+      %th Total Price
+      - if address
+        %th Address
+        %th Shipping Method
+        %th Expected Delivery
+        %th Gift
+      - else
+        -# Delete
+        %th
+    -cart.line_items.each_with_index do |li, i|
+      %tr
+        %td= li.qty
+        %td= li.description
+        - if format
+          %td
+            =form_for li, url: refinery.cart_line_item_path(li) do |lif|
+              -# TODO this is dependent on BKP model relationship structure. How to generalize for different projects?
+              =lif.select :product_id, li.product.book.formats.reject{ |f| f.format_type.nil? }.collect{ |f| [f.format_type.description, f.product_id] }
+        %td{align: 'right'}= number_to_currency li.unit_price
+        %td{align: 'right'}= number_to_currency li.effective_price
+        %td{align: 'right'}= number_to_currency li.qty * li.effective_price
+        - if address 
+          %td
+            - unless li.virtual 
+              =form_for li, url: refinery.cart_line_item_path(li) do |lif|
+                =lif.select :address_id, @addresses.collect { |a| [ a.line_1, a.id ] }
+          -# Shipping Method
+          %td
+          -# Expected Delivery
+          %td
+          -# Gift
+          %td
+            =form_for li, url: refinery.cart_line_item_path(li) do |lif|
+              =lif.check_box :gift, data: i #, :data => { :toggle => 'modal' } # Don't know how to get that modal fade in effect with check boxes
+              -#.btn.btn-xs.btn-primary.gift-button{data: i} Gift
+              =lif.hidden_field :gift_message #, id: "gift-field-#{li.id}"
+        - else
+          -# Delete
+          %td
+            =link_to refinery.cart_line_item_path(li), method: :delete, class: 'btn btn-xs btn-danger' do
+              %span.glyphicon.glyphicon-remove
+        
+    =cart_row cart, format, 'subtotal'
+    =cart_row cart, format, 'discount'
+    =cart_row cart, format, 'shipping'
+    =cart_row cart, format, 'tax'
+    =cart_row cart, format, 'total'
+    -if format
+      %tr
+        %td{colspan: 5, class: 'btn-danger'}
+          =form_for cart, url: refinery.cart_path do |f|
+            =f.text_field :discount_code, placeholder: "Discount Code", value: ''
+            =f.submit :Apply, class: 'btn btn-primary'
+
+-#.modal.fade{style: "display: none;"} # Don't know how to get that modal fade in dialog with check boxes
+#gift-dialog{style: "display: none;"}
+  -#.modal-header
+  %b Gift message
+  %br/
+  -#.modal-body
+  =text_area_tag :gift_message, nil, rows: 4, cols: 40, id: 'gift-message'
+  %br/
+  %br/
+  -#.modal-footer
+  #ok.btn.btn-primary{"data-dismiss" => "modal"} Ok
+  #cancel.btn.btn-danger{"data-dismiss" => "modal"} Cancel
